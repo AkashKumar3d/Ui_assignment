@@ -11,13 +11,20 @@ import { TiShoppingBag } from "react-icons/ti";
 import { AiOutlineArrowDown, AiOutlineMessage } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentPdf } from "react-icons/gr";
-import { BsArrowDown, BsBoxArrowUpRight, BsShare } from "react-icons/bs";
+import { BsArrowDown, BsBoxArrowUpRight, BsShare,BsThreeDotsVertical } from "react-icons/bs";
 import { GrZoomIn, GrZoomOut } from "react-icons/gr";
+// import { RxCross1 } from "react-icons/rx";
+
 const Navbar = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isOptionOpen, setisOptionopen] = useState(false);
 
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
+    };
+
+    const toggleoption = () => {
+        setisOptionopen(!isOptionOpen);
     };
     return (
         <>
@@ -32,30 +39,39 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className={`menu ${isNavOpen ? 'active' : ''}`}>
-                    <ul>
-                        <li>
-                            <Link to="/"><BiSearch style={{height:"20px", width:"20px"}}  /></Link>
+                    <ul className={isNavOpen?("orderlist"):""}>
+                        <li className='navbar_link'>
+                            <Link  to="/"><BiSearch style={{height:"20px", width:"20px"}}/></Link>
+                            {isNavOpen?(<span>Search</span>):("")}
                         </li>
+                        {isNavOpen ? (<hr style={{color:"red" ,width:"10px"}}/>) :""}
                         <li>
-                            <Link to="/contact"><TiShoppingBag  style={{height:"20px", width:"20px"}} /></Link>
+                            <Link to="/contact"><TiShoppingBag  style={{height:"20px", width:"20px"}}/></Link>  
+                            {isNavOpen?(<span>Inbox</span>):("")}
                         </li>
+                        {isNavOpen ? (<hr style={{color:"red" ,width:"10px"}}/>) :""}
                         <li>
-                            <Link to="/about"><HiOutlineBell style={{height:"20px", width:"20px"}} /></Link>
+                            <Link to="/about"><HiOutlineBell style={{height:"20px", width:"20px"}}/></Link>
+                            {isNavOpen?(<span>Notification</span>):("")}
                         </li>
+                        {isNavOpen ? (<hr style={{color:"red" ,width:"10px"}}/>) :""}
                         <li>
                             <Link to="/services"><IoMdHelpCircleOutline style={{height:"20px", width:"20px"}}/></Link>
+                            {isNavOpen?(<span>help</span>):("")}
                         </li>
-
+                        {isNavOpen ? (<hr style={{color:"red" ,width:"10px"}}/>) :""}
                         <li className='profile'>
                             <Link to="/"> <img src={img1} alt="error" /></Link>
+                            {isNavOpen?(<span>Susant Singh</span>):("")}
                         </li>
                     </ul>
                 </div>
                 <div className="hamburger" onClick={toggleNav}>
-                    <div className={`line ${isNavOpen ? 'open' : ''}`} />
-                    <div className={`line ${isNavOpen ? 'open' : ''}`} />
-                    <div className={`line ${isNavOpen ? 'open' : ''}`} />
+                    {
+                        isNavOpen ? (<p style={{height:"20px", width:"20px", fontSize:"20;px"}}>X</p>):(<><div className={`line ${isNavOpen ? 'open' : ''}`} /><div className={`line ${isNavOpen ? 'open' : ''}`} /><div className={`line ${isNavOpen ? 'open' : ''}`} /></>)
+                    }
                 </div>
+              
             </nav>
 
             {/* second section  */}
@@ -71,12 +87,12 @@ const Navbar = () => {
             </div>
 
             {/* third section  */}
-            <div className="third_container">
-                <div className="text_container">
+            <div className={`${isNavOpen ? "third_extra_option":"third_container "}`} >
+                <div className={`${isNavOpen ? "third_extra_text":"text_container"}`}>
                     <h1>Workspace<br />Proposal</h1>
                 </div>
 
-                <div className="third_container_box">
+                <div className={`${isNavOpen ? "third_extra_container_box":"third_container_box"}`}>
                     <img src={img2} alt="" />
                     <p>+    </p>
                     <img src={img3} alt="" />
@@ -127,17 +143,21 @@ const Navbar = () => {
                     <p>Our Deck</p>
                 </div>
                 <div className="fifth_section2">
-                    <div className="fifth_section2_box1">
+                    <div className="fifth_section2_box1" onClick={toggleoption}>
                         <h2>Company Profile</h2>
-                        <div className="fifth_section2_box1_mini">
+                        {
+                            isOptionOpen ? (<div className="fifth_section2_box1_mini">
                             <button><AiOutlineArrowDown /></button>
                             <button><BiHide /></button>
                             <button className='fifth_section2_box1_mini_last'><RiDeleteBin6Line /></button>
-                        </div>
+                        </div>):( <div>
+                            <button><BsThreeDotsVertical/></button>
+                        </div>)
+                        }
                     </div>
                     <div className="fifth_section2_box2">
-                        <div id="box">
-                            <div id="box1">
+                        <div id={`${isNavOpen ? "extra_box":"box"}`}>
+                            <div id={`${isNavOpen ? "extra_box":"box1"}`}>
                                 <button className="btn"><GrDocumentPdf style={{ height: "45px" }} /></button>
                                 <button className="btn">1/15 </button>
                                 <button className="btn"><BsArrowDown style={{ height: "45px" }} /></button>
@@ -145,9 +165,9 @@ const Navbar = () => {
                                 <button className="btn"><GrZoomIn style={{ height: "45px" }} /></button>
                                 <button className="btn"><BsBoxArrowUpRight style={{ height: "45px" }} /></button>
                             </div>
-                            <div id="box2">
-                                <div className="box">
-                                    <h1 className='para1'>Wework</h1>
+                            <div id={`${isNavOpen ? "extra_box_class":"box2"}`}>
+                                <div className={`${isNavOpen ? "extra_box_class":"box"}`}>
+                                    <h1 className={`${isNavOpen ? "extra_para1":'para1'}`}>Wework</h1>
                                     <p>For all the ways you work, we`re here</p>
                                 </div>
                             </div>
